@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="pt-BR" class="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="DSS GIG — Diálogo Semanal de Segurança: assista ao vídeo da semana e registre sua participação." />
+  <title>DSS GIG — Diálogo Semanal de Segurança</title>
+  <link rel="icon" href="icone lsg.ico" type="image/x-icon" />
+  <link rel="preload" href="colab.css" as="style" />
+  <link rel="preload" href="fonts/plus-jakarta-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="fonts/plus-jakarta-sans-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="fonts/plus-jakarta-sans.css" />
+  <link rel="stylesheet" href="colab.css" />
+  <!-- SignaturePad — carregado de forma síncrona para garantir disponibilidade -->
+  <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.1.7/dist/signature_pad.umd.min.js"></script>
+  <!-- YouTube IFrame API -->
+  <script src="https://www.youtube.com/iframe_api" defer></script>
+  <script src="colab.js" defer></script>
+</head>
+<body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 min-h-screen flex flex-col antialiased font-sans transition-colors duration-200">
+
+  <!-- ── Cabeçalho ── -->
+  <header class="bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 shadow-sm sticky top-0 z-40 no-print">
+    <div class="max-w-3xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <img src="logo lsg.png" alt="LSG Sky Chefs" class="h-10 w-auto object-contain"
+          onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2240%22 height=%2240%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%232563eb%22 stroke-width=%222%22><rect x=%223%22 y=%223%22 width=%2218%22 height=%2218%22 rx=%222%22/><path d=%22M9 17V7l7 5z%22/></svg>'" />
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="font-extrabold text-lg tracking-tight text-slate-900 dark:text-white">DSS GIG</span>
+            <span class="text-xs font-semibold bg-brand-100 dark:bg-brand-900 text-brand-700 dark:text-brand-300 px-2 py-0.5 rounded-full">Colaborador</span>
+          </div>
+          <p class="text-xs text-slate-500 dark:text-slate-400 hidden sm:block">Diálogo Semanal de Segurança</p>
+        </div>
+      </div>
+      <!-- Botão Dark Mode -->
+      <button id="btnDarkMode" aria-label="Alternar modo escuro"
+        class="p-2 rounded-xl text-slate-500 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">
+        <svg id="iconSun" class="w-5 h-5 hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        <svg id="iconMoon" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main class="flex-1 max-w-3xl mx-auto w-full px-4 py-8 space-y-6">
+
+    <!-- ── 1. Identificação ── -->
+    <section id="secIdentificacao" class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 p-6">
+      <div class="flex items-center gap-2 mb-5">
+        <div class="w-8 h-8 bg-brand-100 dark:bg-brand-900 rounded-lg flex items-center justify-center">
+          <svg class="w-4 h-4 text-brand-600 dark:text-brand-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <h2 class="font-bold text-base text-slate-700 dark:text-slate-200">Identificação</h2>
+      </div>
+      <div class="flex gap-3">
+        <div class="flex-1">
+          <label for="matricula" class="block text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1.5">Matrícula</label>
+          <input id="matricula" type="text" inputmode="numeric" placeholder="Ex: 12345" autocomplete="off"
+            aria-label="Digite sua matrícula"
+            class="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all text-slate-900 dark:text-white placeholder:text-slate-400" />
+        </div>
+        <div class="flex items-end">
+          <button id="btnBuscar"
+            class="bg-brand-500 hover:bg-brand-600 active:bg-brand-700 text-white font-semibold py-2.5 px-5 rounded-xl text-sm transition-all shadow-sm hover:shadow-md flex items-center gap-2 whitespace-nowrap">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+            Buscar
+          </button>
+        </div>
+      </div>
+      <!-- Resultado da busca -->
+      <div id="funcInfo" class="mt-4 hidden"></div>
+    </section>
+
+    <!-- ── 2. Lista de Vídeos ── -->
+    <section id="secVideos" class="hidden bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 p-6">
+      <div class="flex items-center gap-2 mb-5">
+        <div class="w-8 h-8 bg-brand-100 dark:bg-brand-900 rounded-lg flex items-center justify-center">
+          <svg class="w-4 h-4 text-brand-600 dark:text-brand-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="m10 8 5 3-5 3V8z"/><path d="M8 21h8M12 17v4"/></svg>
+        </div>
+        <h2 class="font-bold text-base text-slate-700 dark:text-slate-200">Vídeos Disponíveis</h2>
+      </div>
+      <div id="listaVideos" class="space-y-3"></div>
+    </section>
+
+    <!-- ── 3. Player + Assinatura ── -->
+    <section id="secPlayer" class="hidden space-y-5">
+
+      <!-- Cabeçalho do vídeo -->
+      <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 p-5">
+        <p class="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1">Semana <span id="semanaISO" class="text-brand-600 dark:text-brand-400"></span></p>
+        <h3 id="videoTitle" class="font-bold text-slate-800 dark:text-white text-base leading-snug"></h3>
+        <p class="text-xs text-slate-400 dark:text-slate-500 mt-1">O botão <strong class="text-slate-600 dark:text-slate-300">Registrar</strong> aparecerá ao final do vídeo.</p>
+      </div>
+
+      <!-- Player -->
+      <div id="playerWrapper" class="relative bg-black rounded-2xl overflow-hidden shadow-lg" style="aspect-ratio:16/9">
+        <div id="ytplayer" class="absolute inset-0 w-full h-full"></div>
+
+        <!-- Overlay de play/pause — permanece SEMPRE clicável (mesmo durante a reprodução) para
+             que nenhum toque chegue diretamente ao iframe do YouTube (evita gestos nativos como
+             avançar/retroceder com duplo toque). Só o ícone visual aparece/desaparece. -->
+        <button id="btnPlayOverlay" aria-label="Tocar ou pausar vídeo"
+          class="absolute inset-0 w-full h-full flex items-center justify-center bg-black/30 transition-colors group">
+          <div id="playIconWrap" class="w-16 h-16 rounded-full bg-white/90 group-hover:bg-white flex items-center justify-center shadow-xl transition-all">
+            <svg id="iconPlay" class="w-7 h-7 text-brand-600 ml-1" fill="currentColor" viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+          </div>
+        </button>
+
+        <!-- Botão de tela cheia (gira o celular para paisagem automaticamente quando suportado).
+             Usa a classe própria .dss-fullscreen-btn (CSS puro, ver colab.css) em vez de
+             classes Tailwind, porque este colab.css é um build "purgado" que só contém as
+             classes já usadas no projeto — classes novas como w-9/h-9/bg-black/50 não
+             existem nele e fariam o botão renderizar sem tamanho nem fundo. -->
+        <button id="btnFullscreen" type="button" aria-label="Assistir em tela cheia" class="dss-fullscreen-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"/>
+          </svg>
+        </button>
+
+        <!-- Aviso de "gire o celular" — cobre principalmente iOS/Safari, onde a rotação
+             automática (Screen Orientation API) não é suportada -->
+        <div id="avisoGirar">
+          <div>
+            <span class="icon">🔄</span>
+            <p class="mt-3 font-semibold text-sm">Gire o celular para assistir em tela cheia</p>
+          </div>
+        </div>
+
+        <!-- Checkpoint de atenção: pausa automaticamente a cada 2 minutos e
+             pede confirmação de que o colaborador ainda está assistindo -->
+        <div id="checkpointModal" class="dss-modal-overlay">
+          <div class="dss-modal-box">
+            <p class="dss-modal-title">Continuar vídeo?</p>
+            <p class="dss-modal-sub">Confirme que você ainda está acompanhando o treinamento.</p>
+            <div class="dss-modal-actions">
+              <button id="btnCheckpointNao" type="button" class="dss-modal-btn dss-modal-btn-secondary">Não</button>
+              <button id="btnCheckpointSim" type="button" class="dss-modal-btn dss-modal-btn-primary">Sim</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bloco de Perguntas (Quiz) — exibido ao final do vídeo, se houver
+           perguntas cadastradas para ele. Fica oculto e é pulado quando o
+           vídeo não tem quiz configurado. -->
+      <div id="quizBlock" class="hidden bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 p-6">
+        <div class="flex items-center gap-2 mb-4">
+          <div class="w-8 h-8 bg-brand-100 dark:bg-brand-900 rounded-lg flex items-center justify-center">
+            <svg class="w-4 h-4 text-brand-600 dark:text-brand-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          </div>
+          <div>
+            <h3 class="font-bold text-base text-slate-700 dark:text-slate-200">Perguntas sobre o treinamento</h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400">Responda corretamente para liberar a assinatura</p>
+          </div>
+        </div>
+        <div id="quizPerguntas"></div>
+        <div id="quizFeedback"></div>
+        <div class="mt-2 flex justify-end">
+          <button id="btnConfirmarQuiz" type="button"
+            class="bg-brand-500 hover:bg-brand-600 active:bg-brand-700 text-white font-semibold py-2.5 px-6 rounded-xl text-sm transition-all shadow-sm hover:shadow-md">
+            Confirmar respostas
+          </button>
+        </div>
+      </div>
+
+      <!-- Bloco de Assinatura -->
+      <div id="signatureBlock" class="hidden bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 p-6">
+        <div class="flex items-center gap-2 mb-4">
+          <div class="w-8 h-8 bg-emerald-100 dark:bg-emerald-900 rounded-lg flex items-center justify-center">
+            <svg class="w-4 h-4 text-emerald-600 dark:text-emerald-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          </div>
+          <div>
+            <h3 class="font-bold text-base text-slate-700 dark:text-slate-200">Assinatura</h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400">Assine seu nome no quadro abaixo</p>
+          </div>
+        </div>
+        <div class="border-2 border-dashed border-slate-200 dark:border-slate-600 rounded-xl overflow-hidden bg-white dark:bg-slate-900 touch-none" style="cursor:crosshair">
+          <canvas id="signaturePad" class="w-full block" width="600" height="280"
+            style="touch-action:none;display:block;width:100%;height:280px"></canvas>
+        </div>
+        <div class="mt-3 flex justify-end">
+          <button id="btnLimpar"
+            class="text-sm text-slate-500 dark:text-slate-400 hover:text-red-500 dark:hover:text-red-400 font-medium flex items-center gap-1.5 transition-colors">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 6h18M19 6l-1 14H6L5 6M8 6V4h8v2"/></svg>
+            Limpar assinatura
+          </button>
+        </div>
+      </div>
+
+      <!-- Ações -->
+      <div class="flex flex-col sm:flex-row gap-3">
+        <button id="btnRegistrar"
+          class="hidden flex-1 bg-emerald-500 hover:bg-emerald-600 active:bg-emerald-700 text-white font-bold py-3 px-6 rounded-xl text-sm transition-all shadow-sm hover:shadow-md flex items-center justify-center gap-2">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+          Registrar Participação
+        </button>
+        <button id="btnTrocarVideo"
+          class="sm:w-auto bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 font-semibold py-3 px-6 rounded-xl text-sm transition-all flex items-center justify-center gap-2">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+          Trocar Vídeo
+        </button>
+      </div>
+
+      <!-- Mensagem de resultado -->
+      <div id="mensagem"></div>
+
+    </section>
+
+  </main>
+
+  <footer class="bg-slate-900 dark:bg-slate-950 text-slate-400 border-t border-slate-800 py-6 text-center text-xs mt-8 no-print">
+    <div class="max-w-3xl mx-auto px-4">
+      <p class="font-medium text-slate-300">© Caterair Serviços de Bordo e Hotelaria LTDA - Base GIG</p>
+      <p class="mt-1 text-slate-500">Diálogo Semanal de Segurança</p>
+    </div>
+  </footer>
+
+</body>
+</html>

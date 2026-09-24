@@ -1,0 +1,79 @@
+:root{ --bg:#f7f9fc; --card:#ffffff; --text:#1f2937; --muted:#6b7280; --primary:#2563eb; --primary-600:#1d4ed8; --ok:#16a34a; --warn:#f59e0b; --error:#dc2626; --border:#e5e7eb; }
+*{ box-sizing:border-box; }
+body{ margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Liberation Sans'; background:var(--bg); color:var(--text); }
+.site-header{ background:linear-gradient(135deg, #1e293b, #0f172a); color:#fff; padding:24px; text-align:center; }
+.site-header .subtitle{ color:#cbd5e1; margin-top:6px; }
+.container{ max-width:1000px; margin:24px auto; padding:0 16px; }
+.card{ background:var(--card); border:1px solid var(--border); border-radius:12px; padding:20px; margin-bottom:16px; box-shadow: 0 6px 20px rgba(0,0,0,0.04); }
+.row{ display:flex; gap:12px; align-items:center; margin:10px 0; flex-wrap:wrap; }
+label{ min-width:160px; color:var(--muted); }
+input[type="text"], input[type="file"]{ flex:1; padding:10px 12px; border:1px solid var(--border); border-radius:8px; outline:none; }
+button{ padding:10px 14px; border:none; border-radius:8px; cursor:pointer; }
+button.primary{ background:var(--primary); color:#fff; } button.primary:hover{ background:var(--primary-600); }
+button.secondary{ background:#FF0000; color:#111827; } button.secondary:hover{ background:#cbd5e1; }
+.hidden{ display:none; }
+.info .ok{ color:var(--ok); }
+.warn{ color:var(--warn); }
+.error{ color:var(--error); }
+.message{ margin-top:10px; }
+.video-list{ display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:12px; }
+.video-card{ border:1px solid var(--border); padding:12px; border-radius:10px; background:#fff; display:flex; flex-direction:column; gap:8px; justify-content:space-between; }
+.video-card h3{ margin:0; font-size:1.05rem; }
+.player-container{ background:#000; aspect-ratio:16/9; display:flex; align-items:center; justify-content:center; border-radius:12px; overflow:hidden; }
+#ytplayer{ width:100%; height:100%; }
+.signature-block{ margin-top:16px; }
+.signature-wrapper{ border:1px dashed var(--border); background:#fafafa; padding:8px; border-radius:10px; width:max-content; max-width:100%; overflow:auto; }
+.signature-actions{ margin-top:8px; }
+.sig-img{ height:28px; }
+.table-wrapper{ overflow:auto; }
+.table{ width:100%; border-collapse:collapse; }
+.table th, .table td{ border:1px solid var(--border); padding:8px; text-align:left; }
+.table th{ background:#f1f5f9; }
+.site-footer{ padding:14px; text-align:center; color:#6b7280; border-top:1px solid var(--border); margin-top:24px; }
+.muted{ color:var(--muted); }
+
+/* === Overrides (2026-02-07): Botões DSS GIG === */
+/* 1) Buscar, Assistir e Registrar em azul: já mapeados para .primary nos HTMLs */
+button.primary{ background: var(--primary); color:#fff; }
+button.primary:hover{ background: var(--primary-600); }
+
+/* 2) Novo Funcionário em laranja (tom do logo LSG Sky Chefs) */
+#btnAddFunc{ background:#f2a01b; color:#111827; }
+#btnAddFunc:hover{ background:#d78d17; }
+
+/* 3) Demais botões (.secondary) no padrão nativo dos navegadores */
+button.secondary{
+  background: ButtonFace;
+  color: ButtonText;
+  border: 1px solid ButtonBorder;
+}
+button.secondary:hover{ background: ButtonFace; }
+
+/* Ajuste: margem entre label e campo = 2px */
+.filters-wrap label{ margin-bottom: 2px; }
+
+/* Overlay de agradecimento (tela cheia) */
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(15, 23, 42, 0.88); /* azul marinho translúcido */
+  display: grid;
+  place-items: center;
+}
+.overlay.hidden { display: none; }
+
+.overlay-content {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 28px 24px;
+  max-width: 680px;
+  margin: 0 16px;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0,0,0,.25);
+}
+.overlay-content h2 {
+  margin: 0 0 14px 0;
+  font-weight: 700;
+  color: #0f172a;
+}

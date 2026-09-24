@@ -1,0 +1,42 @@
+{
+  "rewrites": [
+    { "source": "/gestor", "destination": "/gestor/index.html" }
+  ],
+  "headers": [
+    {
+      "source": "/gestor/index.html",
+      "headers": [
+        { "key": "Cache-Control", "value": "no-cache, must-revalidate" }
+      ]
+    },
+    {
+      "source": "/gestor/app.js",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=600, must-revalidate" }
+      ]
+    },
+    {
+      "source": "/gestor/styles.css",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=600, must-revalidate" }
+      ]
+    },
+    {
+      "source": "/gestor/fonts/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    },
+    {
+      "source": "/gestor/(logo_b64|assin_b64).js",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    }
+  ],
+  "functions": {
+    "api/gas.js": {
+      "maxDuration": 60
+    }
+  }
+}
