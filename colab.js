@@ -1,4 +1,4 @@
-// DSS GIG — Colaborador (colab.js)
+// DSS SDU — Colaborador (colab.js)
 // Toda a lógica de identificação, listagem de vídeos, player e registro.
 
 const API_BASE = '/api/gas';
@@ -205,7 +205,7 @@ function alertCard(type, html) {
     html.classList.toggle('dark', dark);
     sun.classList.toggle('hidden', !dark);
     moon.classList.toggle('hidden', dark);
-    try { localStorage.setItem('dssgig_dark', dark ? '1' : '0'); } catch (e) {}
+    try { localStorage.setItem('dsssdu_dark', dark ? '1' : '0'); } catch (e) {}
 
     // A cor da caneta e o fundo do canvas de assinatura NÃO acompanham o
     // modo escuro — ver explicação acima em getPenColor().
@@ -219,7 +219,7 @@ function alertCard(type, html) {
   }
 
   let saved = '0';
-  try { saved = localStorage.getItem('dssgig_dark') || '0'; } catch (e) {}
+  try { saved = localStorage.getItem('dsssdu_dark') || '0'; } catch (e) {}
   setDark(saved === '1');
 
   document.getElementById('btnDarkMode').addEventListener('click', () => {
