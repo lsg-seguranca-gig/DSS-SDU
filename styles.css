@@ -32,7 +32,7 @@ button.secondary{ background:#FF0000; color:#111827; } button.secondary:hover{ b
 .site-footer{ padding:14px; text-align:center; color:#6b7280; border-top:1px solid var(--border); margin-top:24px; }
 .muted{ color:var(--muted); }
 
-/* === Overrides (2026-02-07): Botões DSS GIG === */
+/* === Overrides (2026-02-07): Botões DSS SDU === */
 /* 1) Buscar, Assistir e Registrar em azul: já mapeados para .primary nos HTMLs */
 button.primary{ background: var(--primary); color:#fff; }
 button.primary:hover{ background: var(--primary-600); }

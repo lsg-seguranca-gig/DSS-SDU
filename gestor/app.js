@@ -1023,9 +1023,9 @@ async function gerarPDF(){
       const generatedAt = new Date().toLocaleString('pt-PT');
       doc.setFont('helvetica', 'italic'); doc.setFontSize(9); doc.text('Gerado em: ' + generatedAt, M_LEFT, footerY - 4 * L_H);
       doc.setFont('helvetica', 'normal'); doc.setFontSize(9);
-      doc.text('Caterair Serviços de Bordo e Hotelaria LTDA - Base GIG', M_LEFT, footerY - 3 * L_H);
-      doc.text('CNPJ 33.375.601/0001-38', M_LEFT, footerY - 2 * L_H);
-      doc.text('Rua P, S/N, Área de Apoio do Aeroporto Internacional do Rio de Janeiro - Ilha do Governador - RJ', M_LEFT, footerY - 1 * L_H);
+      doc.text('Caterair Serviços de Bordo e Hotelaria LTDA - Base SDU', M_LEFT, footerY - 3 * L_H);
+      doc.text('CNPJ 33.375.601/0028-58', M_LEFT, footerY - 2 * L_H);
+      doc.text('Rua Jardel Jercolis, 50 - Glória - Rio de Janeiro - RJ', M_LEFT, footerY - 1 * L_H);
       const pagText = `Página ${pageNumber} de ${totalPagesText}`.trim();
       doc.text(pagText, pageWidth / 2, footerY, { align: 'center' });
     }
@@ -1300,7 +1300,7 @@ function escapeHtml(str){
 function nomeArquivo(ext){ 
   const hoje = new Date(); 
   const pad = n => String(n).padStart(2, '0'); 
-  return `DSS_GIG_Relatorio_${hoje.getFullYear()}-${pad(hoje.getMonth() + 1)}-${pad(hoje.getDate())}.${ext}`; 
+  return `DSS_SDU_Relatorio_${hoje.getFullYear()}-${pad(hoje.getMonth() + 1)}-${pad(hoje.getDate())}.${ext}`; 
 }
 
 function normalizarDataInput(v){
@@ -2515,7 +2515,7 @@ async function dashGerarXLS_NP(){
   const wb = XLSX.utils.book_new();
   const ws = XLSX.utils.json_to_sheet(base.map(r => ({ 'Matrícula': r.Matricula ?? '', 'Colaborador': r.Nome ?? '', 'Setor': r.Setor ?? '' })));
   XLSX.utils.book_append_sheet(wb, ws, 'Ausentes');
-  XLSX.writeFile(wb, `DSS_GIG_NaoParticipantes_${(document.getElementById('kpiSemanaSel').textContent || 'semana')}.xlsx`);
+  XLSX.writeFile(wb, `DSS_SDU_NaoParticipantes_${(document.getElementById('kpiSemanaSel').textContent || 'semana')}.xlsx`);
 }
 
 // Exportação Excel de Participantes do Dashboard
@@ -2526,7 +2526,7 @@ async function dashGerarXLS_P(){
   const wb = XLSX.utils.book_new();
   const ws = XLSX.utils.json_to_sheet(base.map(r => ({ 'Matrícula': r.Matricula ?? '', 'Colaborador': r.Nome ?? '', 'Setor': r.Setor ?? '', 'Data de Participação': formatTimestamp(r.Timestamp) })));
   XLSX.utils.book_append_sheet(wb, ws, 'Presencas');
-  XLSX.writeFile(wb, `DSS_GIG_Participantes_${(document.getElementById('kpiSemanaSel').textContent || 'semana')}.xlsx`);
+  XLSX.writeFile(wb, `DSS_SDU_Participantes_${(document.getElementById('kpiSemanaSel').textContent || 'semana')}.xlsx`);
 }
 
 function dashCompareSemanaISODesc(a, b){ 
@@ -2560,12 +2560,12 @@ function dashParseSemanaISO(s){
       iconLight.classList.add('hidden');
       btn.title = 'Mudar para modo escuro';
     }
-    try { localStorage.setItem('dssgig_dark', dark ? '1' : '0'); } catch(e){}
+    try { localStorage.setItem('dsssdu_dark', dark ? '1' : '0'); } catch(e){}
   };
 
   // Preferência salva ou preferência do sistema
   let saved;
-  try { saved = localStorage.getItem('dssgig_dark'); } catch(e){}
+  try { saved = localStorage.getItem('dsssdu_dark'); } catch(e){}
   const prefersDark = window.matchMedia?.('(prefers-color-scheme: dark)').matches;
   apply(saved !== null ? saved === '1' : prefersDark);
 

@@ -1,4 +1,4 @@
-# DSS GIG — pacote final (index + gestor) com proxy apontando para seu Apps Script
+# DSS SDU — pacote final (index + gestor) com proxy apontando para seu Apps Script
 
 - /index.html (colaborador)
 - /gestor.html (gestor, PDF A4 otimizado)
