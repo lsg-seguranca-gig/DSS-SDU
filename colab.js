@@ -102,6 +102,16 @@ function getSemanaAtualISO() {
   return `${ano}-W${String(semana).padStart(2, '0')}`;
 }
 
+// "Hoje" no fuso de Brasília, como meia-noite UTC do dia (ms). Não depende do
+// fuso do aparelho nem do UTC: às 21h de domingo em Brasília o UTC já é
+// segunda, o que fazia a semana seguinte aparecer antes da hora.
+function hojeBRMs() {
+  const p = new Intl.DateTimeFormat('en-CA', {
+    timeZone: 'America/Sao_Paulo', year: 'numeric', month: '2-digit', day: '2-digit'
+  }).format(new Date()).split('-');
+  return Date.UTC(+p[0], +p[1] - 1, +p[2]);
+}
+
 function semanaEmFerias(semanaISO, inicioFerias, fimFerias) {
   const seg = isoParaSegunda(semanaISO);
   const dom = isoParaDomingo(semanaISO);
@@ -741,8 +751,7 @@ document.getElementById('btnBuscar').addEventListener('click', async () => {
     }
 
     // Verificar se está de férias/afastamento HOJE — bloqueia acesso total
-    const hoje = new Date();
-    hoje.setUTCHours(0, 0, 0, 0);
+    const hoje = new Date(hojeBRMs());
     const feriaHoje = listaFerias.find(f => {
       const ini = parseDateBR(f.InicioFerias);
       const fim = parseDateBR(f.FimFerias);
@@ -823,8 +832,7 @@ document.getElementById('btnBuscar').addEventListener('click', async () => {
     //    vídeo mais recente, e ele precisa poder testá-lo mesmo que a semana
     //    vigente (por data) ainda não tenha começado ou já tenha passado.
     if (!isTesteUser) {
-      const agora = new Date();
-      const hojeMs = Date.UTC(agora.getUTCFullYear(), agora.getUTCMonth(), agora.getUTCDate());
+      const hojeMs = hojeBRMs();
 
       todosTreinamentos = todosTreinamentos.filter(t => {
         // Extrair as duas datas dd/mm/aaaa do Titulo
